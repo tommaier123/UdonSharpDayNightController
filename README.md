@@ -1,1 +1,1 @@
-![GitHub Logo](/values.png)
+![Values](/Values.png)
