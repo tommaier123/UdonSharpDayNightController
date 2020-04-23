@@ -30,11 +30,11 @@ I spent a lot of time optimizing the lighting and shadows so the world is able t
 
 You can download the day night cycle controller script here. It will definitely work with the default skybox and should also work with any procedural skybox.
 
+![Values](/Values.png)
+
 ## **Future Updates:**
 * Moon cycle
 * Seasons
 * Weather
 * More dynamic objects
 * Videoplayer (as soon as Udon supports that)
-
-![Values](/Values.png)
