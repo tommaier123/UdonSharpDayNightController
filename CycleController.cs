@@ -1,4 +1,3 @@
-
 using System.Collections.Generic;
 using UdonSharp;
 using UnityEngine;
@@ -12,6 +11,7 @@ public class CycleController : UdonSharpBehaviour
 
     public Slider SpeedSlider;
     public Slider TimeSlider;
+    public Toggle LocalToggle;
 
     public Material LowCloud;
     public Material HighCloud;
@@ -27,16 +27,17 @@ public class CycleController : UdonSharpBehaviour
     public AudioSource Cicadas;
 
     [UdonSynced]
-    public float SetTime = 0f;
+    public float SetTime = 0.2f;
     [UdonSynced]
     public int syncid = 0;
     public int lastreceivedid = 0;
     [UdonSynced]
-    public float Speed = 1 / 600f;
+    public float SetSpeed = 1 / 600f;
 
 
     [Range(0, 1)]
     public float CurrentTimeOfDay = 0.2f;
+    public float Speed = 1 / 600f;
     [HideInInspector]
     public float TimeMultiplier = 1f;
 
@@ -82,6 +83,8 @@ public class CycleController : UdonSharpBehaviour
     float BirdsInitialVolume;
     float CicadasInitialVolume;
 
+    bool local = false;
+
     void Start()
     {
         SunInitialIntensity = Sun.intensity;
@@ -92,27 +95,30 @@ public class CycleController : UdonSharpBehaviour
         SpeedSlider.value = Speed;
     }
 
-
-    void Interact()
+    public void LocalUpdated()
     {
-        Networking.SetOwner(Networking.LocalPlayer, this.gameObject);
-        SetTime = CurrentTimeOfDay + 0.083f;
-        syncid = GetID();
+        local = LocalToggle.isOn;
+        if (!local)
+        {
+            CurrentTimeOfDay = SetTime;
+            Speed = SetSpeed;
+        }
     }
 
-    public void SpeedSliderUpdated()
+    public void SliderUpdated()
     {
-        Networking.SetOwner(Networking.LocalPlayer, this.gameObject);
-        SetTime = TimeSlider.value;
-        Speed = SpeedSlider.value;
-        syncid = GetID();
-    }
-
-    public void TimeSliderUpdated()
-    {
-        Networking.SetOwner(Networking.LocalPlayer, this.gameObject);
-        SetTime = TimeSlider.value;
-        syncid = GetID();
+        if (!local)
+        {
+            //Networking.SetOwner(Networking.LocalPlayer, this.gameObject);
+            SetTime = TimeSlider.value;
+            SetSpeed = SpeedSlider.value;
+            syncid = GetID();
+        }
+        else
+        {
+            CurrentTimeOfDay = TimeSlider.value;
+            Speed = SpeedSlider.value;
+        }
     }
 
     private int GetID()
@@ -124,10 +130,14 @@ public class CycleController : UdonSharpBehaviour
     {
         if (syncid != lastreceivedid)
         {
-            CurrentTimeOfDay = SetTime;
             lastreceivedid = syncid;
-            TimeSlider.value = CurrentTimeOfDay;
-            SpeedSlider.value = Speed;
+            if (!local)
+            {
+                CurrentTimeOfDay = SetTime;
+                Speed = SetSpeed;
+                TimeSlider.value = CurrentTimeOfDay;
+                SpeedSlider.value = Speed;
+            }
         }
         else if (TimeSlider.gameObject.activeInHierarchy && Time.time % 1 < 0.01f)
         {
