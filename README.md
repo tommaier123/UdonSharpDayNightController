@@ -1,9 +1,9 @@
 # ---Added by Iconoclass---
-IMPORT THE FOLLOWING TO USE THIS PREFAB:
-VRCHAT SDK3 WORLD			https://vrchat.com/home/download
-UDON SHARP				https://github.com/MerlinVR/UdonSharp/releases
-UDON TOOLKIT				https://github.com/orels1/UdonToolkit/releases
-BFW SIMPLE DYNAMIC CLOUDS			https://assetstore.unity.com/packages/tools/particles-effects/bfw-simple-dynamic-clouds-85665
+* IMPORT THE FOLLOWING TO USE THIS PREFAB:
+* VRCHAT SDK3 WORLD			https://vrchat.com/home/download
+* UDON SHARP				https://github.com/MerlinVR/UdonSharp/releases
+* UDON TOOLKIT				https://github.com/orels1/UdonToolkit/releases
+* BFW SIMPLE DYNAMIC CLOUDS			https://assetstore.unity.com/packages/tools/particles-effects/bfw-simple-dynamic-clouds-85665
 
 I added tooltips and an UdonToolkit custom inspector to the script.
 I also commented out parts of the script specific to Nova_Max's world.
