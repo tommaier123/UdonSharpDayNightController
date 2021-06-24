@@ -6,6 +6,7 @@
 * BFW SIMPLE DYNAMIC CLOUDS			https://assetstore.unity.com/packages/tools/particles-effects/bfw-simple-dynamic-clouds-85665
 
 - Open your `Project Settings` -> `UdonSharp` and in the `Default Behaviour Editor` select `UdonToolkit Editor`
+![SetUdonToolkit](/SetUdonToolkit.png)
 
 I added tooltips and an UdonToolkit custom inspector to the script.
 I also commented out parts of the script specific to Nova_Max's world.
